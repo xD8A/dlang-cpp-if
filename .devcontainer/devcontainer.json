@@ -1,0 +1,13 @@
+{
+  "name": "dlang-cpp-if",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dlang-vscode-project.dlang-vscode"
+      ]
+    }
+  }
+}

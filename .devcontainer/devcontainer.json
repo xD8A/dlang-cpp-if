@@ -6,7 +6,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "dlang-vscode-project.dlang-vscode"
+        "webfreak.dlang-bundle"
       ]
     }
   }

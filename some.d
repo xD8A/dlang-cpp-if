@@ -15,6 +15,10 @@ protected:
     void* d_ptr;
 }
 
+static assert(__traits(getVirtualIndex, SomeObject.getObjectA) == 2);
+static assert(__traits(getVirtualIndex, SomeObject.getObjectB) == 3);
+static assert(__traits(getVirtualIndex, SomeObject.getObjectC) == -1);
+
 abstract class SomeItem
 {
 public:
@@ -29,6 +33,12 @@ public:
 protected:
     void* d_ptr;
 }
+
+static assert(__traits(getVirtualIndex, SomeItem.getItemA) == 2);
+static assert(__traits(getVirtualIndex, SomeItem.getItemB) == 3);
+static assert(__traits(getVirtualIndex, SomeItem.getItemC) == 4);
+static assert(__traits(getVirtualIndex, SomeItem.getItemD) == 5);
+static assert(__traits(getVirtualIndex, SomeItem.getItemE) == -1);
 
 
 interface SomeItemInterface
@@ -65,6 +75,13 @@ private:
     }
 }
 
+static assert(__traits(getVirtualIndex, SomeObjectItem.getObjectB) == 3);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemB) == 4);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemD) == 5);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemA) == 6);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemC) == 7);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemE) == -1);
+
 
 class CustomObjectItem : SomeObjectItem
 {
@@ -78,3 +95,7 @@ public:
 protected:
     void* d_ptr;
 }
+
+static assert(__traits(getVirtualIndex, CustomObjectItem.getItemA) == 6);
+static assert(__traits(getVirtualIndex, CustomObjectItem.getItemC) == 7);
+static assert(__traits(getVirtualIndex, CustomObjectItem.getItemZ) == -1);

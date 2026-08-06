@@ -324,6 +324,45 @@ confirms the installed table is used: `psi.getItemG()` → 1, because the C++
 internal dispatch. Deletion through the secondary vptr still uses the C++
 destructor thunks.
 
+### 2.8 The `this`-adjustment caveat
+
+C++ dispatch through a `SomeItem*` passes `this` pointing at the **secondary
+subobject** (object offset 16), not at the start of the object. That is
+standard MI semantics, and the C++ base methods expect it: inside a C++ method
+of `SomeItem`, `this->d_ptr` resolves to object offset 24 — the secondary
+data.
+
+The installed entries come from two sources, with different behaviour:
+
+- `table[3..5]` are **`Thn16` thunks** from the interface table: they
+  subtract 16 from `this` before entering the D implementation, so the D
+  override always receives the correct object-start pointer.
+- `table[2] = dPrimary[6]` (`getItemA`) and `table[6] = dPrimary[8]`
+  (`getItemF`) are **raw slots of the D primary vtable** — no adjusting
+  thunk. When C++ calls them, the D method is entered with `this` shifted
+  by +16.
+
+Consequences for overrides entered through the raw primary-vtable slots:
+
+- DMD computes member offsets from the start of the D object. With the shifted
+  `this`, every direct member access lands 16 bytes past where DMD expects.
+  For members of the secondary base this coincides with the C++ layout and
+  works; for members of the primary base or of the D-derived class (e.g.
+  `CustomObjectItem::d_ptr` at offset 32) the access hits the wrong memory.
+- A virtual call *inside* such an override reads the vptr from the shifted
+  `this` — the **secondary** vtable — but dispatches with an index of the
+  **primary** table, so it lands on the wrong slot.
+- Accessing members through a **non-virtual C++ base method** is safe: call it
+  via the subobject pointer (`asConstSomeItem()`), and the C++ compiler
+  resolves the field offsets relative to the `SomeItem*` it receives. The call
+  forwards the shifted `this` unchanged — exactly the pointer the C++ method
+  expects.
+
+So overrides entered through the raw primary-vtable slots must not dereference
+`this` directly: return literals, or delegate to C++ base methods through
+`asConstSomeItem()`. Overrides entered through the `Thn16` thunks receive a
+corrected `this` and are unrestricted.
+
 ## 3. Why the vtable slot order matters
 
 Without the reordering in 2.4 the symptom is a **shifted dispatch**: every
@@ -443,3 +482,10 @@ ldc2 -O2 test_some.d some.d some.a -L-lstdc++ -of=test_some_d
     primary order (section 2.4) and rebuild the secondary vtable at runtime
     with the interface thunk table, so C++ dispatch reaches D overrides
     without breaking D→C++ calls.
+11. **Primary-vtable slots in the rebuilt secondary vtable are not
+    `this`-adjusting.** C++ enters those D overrides with `this` shifted to
+    the secondary subobject, so they must not dereference `this` directly
+    (fields, virtual calls, casts). Return literals or delegate to
+    non-virtual C++ base methods through the subobject pointer
+    (`asConstSomeItem()`). Entries from the interface thunk table
+    (`Thn16`) adjust `this` and are unrestricted (section 2.8).

@@ -148,6 +148,11 @@ private:
     {
         return cast(const(SomeItem))(cast(void*)(cast(byte*)&baseItemInterface - (void*).sizeof));
     }
+
+    pragma(inline, true) SomeItem asSomeItem()
+    {
+        return cast(SomeItem)(cast(void*)(cast(byte*)&baseItemInterface - (void*).sizeof));
+    }
 }
 ```
 
@@ -168,8 +173,10 @@ C++ dispatch for the secondary base goes through the **secondary vptr**
 (object offset 16). D has no language support for it, so the binding walks
 there manually:
 
-- `asConstSomeItem()` computes the `SomeItem*` for the fake subobject
-  (`&baseItemInterface - sizeof(void*)` points at the subobject vptr).
+- `asConstSomeItem()` / `asSomeItem()` compute the `SomeItem*` for the fake
+  subobject (`&baseItemInterface - sizeof(void*)` points at the subobject
+  vptr); use the const variant from const methods and the non-const one when a
+  mutable `SomeItem*` is needed.
 - Calling a virtual *through* that pointer (`asConstSomeItem().getItemC()`)
   dispatches through the real secondary vtable, so it reaches the most
   derived C++ override:
@@ -353,15 +360,15 @@ Consequences for overrides entered through the raw primary-vtable slots:
   `this` — the **secondary** vtable — but dispatches with an index of the
   **primary** table, so it lands on the wrong slot.
 - Accessing members through a **non-virtual C++ base method** is safe: call it
-  via the subobject pointer (`asConstSomeItem()`), and the C++ compiler
-  resolves the field offsets relative to the `SomeItem*` it receives. The call
-  forwards the shifted `this` unchanged — exactly the pointer the C++ method
-  expects.
+  via the subobject pointer (`asSomeItem()` / `asConstSomeItem()`), and the
+  C++ compiler resolves the field offsets relative to the `SomeItem*` it
+  receives. The call forwards the shifted `this` unchanged — exactly the
+  pointer the C++ method expects.
 
 So overrides entered through the raw primary-vtable slots must not dereference
 `this` directly: return literals, or delegate to C++ base methods through
-`asConstSomeItem()`. Overrides entered through the `Thn16` thunks receive a
-corrected `this` and are unrestricted.
+`asSomeItem()` / `asConstSomeItem()`. Overrides entered through the `Thn16`
+thunks receive a corrected `this` and are unrestricted.
 
 ## 3. Why the vtable slot order matters
 
@@ -487,5 +494,5 @@ ldc2 -O2 test_some.d some.d some.a -L-lstdc++ -of=test_some_d
     the secondary subobject, so they must not dereference `this` directly
     (fields, virtual calls, casts). Return literals or delegate to
     non-virtual C++ base methods through the subobject pointer
-    (`asConstSomeItem()`). Entries from the interface thunk table
-    (`Thn16`) adjust `this` and are unrestricted (section 2.8).
+    (`asSomeItem()` / `asConstSomeItem()`). Entries from the interface thunk
+    table (`Thn16`) adjust `this` and are unrestricted (section 2.8).

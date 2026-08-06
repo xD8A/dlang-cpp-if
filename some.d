@@ -105,6 +105,11 @@ private:
     {
         return cast(const(SomeItem))(cast(void*)(cast(byte*)&baseItemInterface - (void*).sizeof));
     }
+
+    pragma(inline, true) SomeItem asSomeItem()
+    {
+        return cast(SomeItem)(cast(void*)(cast(byte*)&baseItemInterface - (void*).sizeof));
+    }
 }
 
 static assert(__traits(getVirtualIndex, SomeObjectItem.getObjectB) == 3);

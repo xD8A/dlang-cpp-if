@@ -39,6 +39,12 @@ int main()
     check("ti.getItemC", ti.getItemC(), 13);
     check("ti.getItemD", ti.getItemD(), 114);
     check("ti.getItemE", ti.getItemE(), 15);
+    check("ti.getItemF", ti.getItemF(), 16);
+
+    std::printf("=== SomeObjectItem (via SomeItem*) ===\n");
+    SomeItem* psi = &ti;
+    check("psi->getItemG", psi->getItemG(), 16); // C++ getItemG -> internal getItemF -> 16
+    check("psi->getItemF", psi->getItemF(), 16); // C++ dispatch reaches SomeItem::getItemF
 
     std::printf("=== CustomObjectItem ===\n");
     CustomObjectItem coi;

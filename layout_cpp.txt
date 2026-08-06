@@ -32,49 +32,49 @@ Idx Name          Size      VMA               LMA               File off  Algn
                   CONTENTS, READONLY, GROUP, LINK_ONCE_DISCARD
  12 .group        0000000c  0000000000000000  0000000000000000  000000c0  2**2
                   CONTENTS, READONLY, GROUP, LINK_ONCE_DISCARD
- 13 .text         000006eb  0000000000000000  0000000000000000  000000d0  2**4
+ 13 .text         0000072b  0000000000000000  0000000000000000  000000d0  2**4
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
- 14 .data         00000000  0000000000000000  0000000000000000  000007bb  2**0
+ 14 .data         00000000  0000000000000000  0000000000000000  000007fb  2**0
                   CONTENTS, ALLOC, LOAD, DATA
- 15 .bss          00000000  0000000000000000  0000000000000000  000007bb  2**0
+ 15 .bss          00000000  0000000000000000  0000000000000000  000007fb  2**0
                   ALLOC
- 16 .text.unlikely 0000002e  0000000000000000  0000000000000000  000007bc  2**1
+ 16 .text.unlikely 0000002e  0000000000000000  0000000000000000  000007fc  2**1
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
- 17 .gcc_except_table 00000028  0000000000000000  0000000000000000  000007ea  2**0
+ 17 .gcc_except_table 00000029  0000000000000000  0000000000000000  0000082a  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 18 .rodata._ZTS10SomeObject 0000000d  0000000000000000  0000000000000000  00000818  2**3
+ 18 .rodata._ZTS10SomeObject 0000000d  0000000000000000  0000000000000000  00000858  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 19 .data.rel.ro._ZTI10SomeObject 00000010  0000000000000000  0000000000000000  00000828  2**3
+ 19 .data.rel.ro._ZTI10SomeObject 00000010  0000000000000000  0000000000000000  00000868  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 20 .rodata._ZTS8SomeItem 0000000a  0000000000000000  0000000000000000  00000838  2**3
+ 20 .rodata._ZTS8SomeItem 0000000a  0000000000000000  0000000000000000  00000878  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 21 .data.rel.ro._ZTI8SomeItem 00000010  0000000000000000  0000000000000000  00000848  2**3
+ 21 .data.rel.ro._ZTI8SomeItem 00000010  0000000000000000  0000000000000000  00000888  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 22 .rodata._ZTS14SomeObjectItem 00000011  0000000000000000  0000000000000000  00000860  2**4
+ 22 .rodata._ZTS14SomeObjectItem 00000011  0000000000000000  0000000000000000  000008a0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 23 .data.rel.ro._ZTI14SomeObjectItem 00000038  0000000000000000  0000000000000000  00000878  2**3
+ 23 .data.rel.ro._ZTI14SomeObjectItem 00000038  0000000000000000  0000000000000000  000008b8  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 24 .rodata._ZTS16CustomObjectItem 00000013  0000000000000000  0000000000000000  000008b0  2**4
+ 24 .rodata._ZTS16CustomObjectItem 00000013  0000000000000000  0000000000000000  000008f0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 25 .data.rel.ro._ZTI16CustomObjectItem 00000018  0000000000000000  0000000000000000  000008c8  2**3
+ 25 .data.rel.ro._ZTI16CustomObjectItem 00000018  0000000000000000  0000000000000000  00000908  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 26 .data.rel.ro.local._ZTV10SomeObject 00000030  0000000000000000  0000000000000000  000008e0  2**3
+ 26 .data.rel.ro.local._ZTV10SomeObject 00000030  0000000000000000  0000000000000000  00000920  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 27 .data.rel.ro._ZTV8SomeItem 00000040  0000000000000000  0000000000000000  00000910  2**3
+ 27 .data.rel.ro._ZTV8SomeItem 00000050  0000000000000000  0000000000000000  00000950  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 28 .data.rel.ro._ZTV14SomeObjectItem 00000080  0000000000000000  0000000000000000  00000950  2**3
+ 28 .data.rel.ro._ZTV14SomeObjectItem 00000090  0000000000000000  0000000000000000  000009a0  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 29 .data.rel.ro.local._ZTV16CustomObjectItem 00000090  0000000000000000  0000000000000000  000009d0  2**3
+ 29 .data.rel.ro.local._ZTV16CustomObjectItem 000000a0  0000000000000000  0000000000000000  00000a30  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 30 .data.rel.local.DW.ref.__gxx_personality_v0 00000008  0000000000000000  0000000000000000  00000a60  2**3
+ 30 .data.rel.local.DW.ref.__gxx_personality_v0 00000008  0000000000000000  0000000000000000  00000ad0  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, DATA
- 31 .comment      0000002c  0000000000000000  0000000000000000  00000a68  2**0
+ 31 .comment      0000002c  0000000000000000  0000000000000000  00000ad8  2**0
                   CONTENTS, READONLY
- 32 .note.GNU-stack 00000000  0000000000000000  0000000000000000  00000a94  2**0
+ 32 .note.GNU-stack 00000000  0000000000000000  0000000000000000  00000b04  2**0
                   CONTENTS, READONLY
- 33 .note.gnu.property 00000020  0000000000000000  0000000000000000  00000a98  2**3
+ 33 .note.gnu.property 00000020  0000000000000000  0000000000000000  00000b08  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 34 .eh_frame     000003b8  0000000000000000  0000000000000000  00000ab8  2**3
+ 34 .eh_frame     000003e0  0000000000000000  0000000000000000  00000b28  2**3
                   CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
 
 ===== 2. VTABLE SLOTS (objdump -r, relocations per vtable section) =====
@@ -85,6 +85,8 @@ OFFSET           TYPE              VALUE
 0000000000000028 R_X86_64_64       __cxa_pure_virtual
 0000000000000030 R_X86_64_64       SomeItem::getItemC() const
 0000000000000038 R_X86_64_64       SomeItem::getItemD() const
+0000000000000040 R_X86_64_64       SomeItem::getItemF() const
+0000000000000048 R_X86_64_64       SomeItem::getItemG() const
 
 
 RELOCATION RECORDS FOR [.data.rel.ro._ZTV14SomeObjectItem]:
@@ -99,6 +101,8 @@ OFFSET           TYPE              VALUE
 0000000000000068 R_X86_64_64       non-virtual thunk to SomeObjectItem::getItemB() const
 0000000000000070 R_X86_64_64       SomeItem::getItemC() const
 0000000000000078 R_X86_64_64       non-virtual thunk to SomeObjectItem::getItemD() const
+0000000000000080 R_X86_64_64       SomeItem::getItemF() const
+0000000000000088 R_X86_64_64       SomeItem::getItemG() const
 
 
 
@@ -120,6 +124,7 @@ Contents of section .data.rel.ro._ZTV8SomeItem:
  0010 00000000 00000000 00000000 00000000  ................
  0020 00000000 00000000 00000000 00000000  ................
  0030 00000000 00000000 00000000 00000000  ................
+ 0040 00000000 00000000 00000000 00000000  ................
 --- .data.rel.ro._ZTV14SomeObjectItem ---
 
 some.o:     file format elf64-x86-64
@@ -133,6 +138,7 @@ Contents of section .data.rel.ro._ZTV14SomeObjectItem:
  0050 00000000 00000000 00000000 00000000  ................
  0060 00000000 00000000 00000000 00000000  ................
  0070 00000000 00000000 00000000 00000000  ................
+ 0080 00000000 00000000 00000000 00000000  ................
 --- .data.rel.ro.local._ZTV16CustomObjectItem ---
 
 some.o:     file format elf64-x86-64
@@ -147,6 +153,7 @@ Contents of section .data.rel.ro.local._ZTV16CustomObjectItem:
  0060 00000000 00000000 00000000 00000000  ................
  0070 00000000 00000000 00000000 00000000  ................
  0080 00000000 00000000 00000000 00000000  ................
+ 0090 00000000 00000000 00000000 00000000  ................
 
 ===== 4. CLASS SYMBOLS (objdump -t | c++filt) =====
 0000000000000000 l     F .text.unlikely	000000000000001e SomeObjectItem::SomeObjectItem() [clone .cold]
@@ -155,46 +162,48 @@ Contents of section .data.rel.ro.local._ZTV16CustomObjectItem:
 0000000000000010 g     F .text	000000000000000c SomeObject::getObjectB() const
 0000000000000020 g     F .text	000000000000000b SomeItem::getItemC() const
 0000000000000030 g     F .text	000000000000000c SomeItem::getItemD() const
-0000000000000040 g     F .text	000000000000000a SomeObjectItem::getObjectB() const
-0000000000000050 g     F .text	000000000000000a SomeObjectItem::getItemB() const
-0000000000000060 g     F .text	000000000000000a SomeObjectItem::getItemD() const
-0000000000000070 g     F .text	000000000000000a CustomObjectItem::getItemA() const
-0000000000000080 g     F .text	000000000000000a CustomObjectItem::getItemC() const
-0000000000000090 g     F .text	000000000000000a non-virtual thunk to CustomObjectItem::getItemC() const
-00000000000000a0 g     F .text	000000000000000a non-virtual thunk to SomeObjectItem::getItemB() const
-00000000000000b0 g     F .text	000000000000000a non-virtual thunk to SomeObjectItem::getItemD() const
-00000000000000c0 g     F .text	000000000000000a non-virtual thunk to CustomObjectItem::getItemA() const
-00000000000000d0 g     F .text	0000000000000029 SomeObject::~SomeObject()
+0000000000000040 g     F .text	000000000000000c SomeItem::getItemF() const
+0000000000000050 g     F .text	000000000000000a SomeObjectItem::getObjectB() const
+0000000000000060 g     F .text	000000000000000a SomeObjectItem::getItemB() const
+0000000000000070 g     F .text	000000000000000a SomeObjectItem::getItemD() const
+0000000000000080 g     F .text	000000000000000a CustomObjectItem::getItemA() const
+0000000000000090 g     F .text	000000000000000a CustomObjectItem::getItemC() const
+00000000000000a0 g     F .text	000000000000000a non-virtual thunk to CustomObjectItem::getItemC() const
+00000000000000b0 g     F .text	0000000000000022 SomeItem::getItemG() const
+00000000000000e0 g     F .text	000000000000000a non-virtual thunk to SomeObjectItem::getItemB() const
+00000000000000f0 g     F .text	000000000000000a non-virtual thunk to SomeObjectItem::getItemD() const
+0000000000000100 g     F .text	000000000000000a non-virtual thunk to CustomObjectItem::getItemA() const
+0000000000000110 g     F .text	0000000000000029 SomeObject::~SomeObject()
 0000000000000000  w    O .data.rel.ro.local._ZTV10SomeObject	0000000000000030 vtable for SomeObject
-00000000000000d0 g     F .text	0000000000000029 SomeObject::~SomeObject()
-0000000000000100 g     F .text	0000000000000033 SomeObject::~SomeObject()
-0000000000000140 g     F .text	000000000000007a non-virtual thunk to CustomObjectItem::~CustomObjectItem()
-0000000000000000  w    O .data.rel.ro.local._ZTV16CustomObjectItem	0000000000000090 vtable for CustomObjectItem
-0000000000000000  w    O .data.rel.ro._ZTV14SomeObjectItem	0000000000000080 vtable for SomeObjectItem
-0000000000000000  w    O .data.rel.ro._ZTV8SomeItem	0000000000000040 vtable for SomeItem
-00000000000001c0 g     F .text	000000000000007a CustomObjectItem::~CustomObjectItem()
-00000000000001c0 g     F .text	000000000000007a CustomObjectItem::~CustomObjectItem()
-0000000000000240 g     F .text	0000000000000082 CustomObjectItem::~CustomObjectItem()
-00000000000002d0 g     F .text	000000000000008f non-virtual thunk to CustomObjectItem::~CustomObjectItem()
-0000000000000360 g     F .text	0000000000000036 SomeObject::SomeObject()
-0000000000000360 g     F .text	0000000000000036 SomeObject::SomeObject()
-00000000000003a0 g     F .text	000000000000000c SomeObject::getObjectC() const
-00000000000003b0 g     F .text	0000000000000036 SomeItem::SomeItem()
-00000000000003b0 g     F .text	0000000000000036 SomeItem::SomeItem()
-00000000000003f0 g     F .text	0000000000000029 SomeItem::~SomeItem()
-00000000000003f0 g     F .text	0000000000000029 SomeItem::~SomeItem()
-0000000000000420 g     F .text	0000000000000033 SomeItem::~SomeItem()
-0000000000000460 g     F .text	000000000000000c SomeItem::getItemE() const
-0000000000000470 g     F .text	0000000000000087 SomeObjectItem::SomeObjectItem()
-0000000000000470 g     F .text	0000000000000087 SomeObjectItem::SomeObjectItem()
-0000000000000500 g     F .text	0000000000000052 SomeObjectItem::~SomeObjectItem()
-0000000000000500 g     F .text	0000000000000052 SomeObjectItem::~SomeObjectItem()
-0000000000000560 g     F .text	000000000000005c SomeObjectItem::~SomeObjectItem()
-00000000000005c0 g     F .text	0000000000000052 non-virtual thunk to SomeObjectItem::~SomeObjectItem()
-0000000000000620 g     F .text	000000000000006a non-virtual thunk to SomeObjectItem::~SomeObjectItem()
-0000000000000690 g     F .text	000000000000004e CustomObjectItem::CustomObjectItem()
-0000000000000690 g     F .text	000000000000004e CustomObjectItem::CustomObjectItem()
-00000000000006e0 g     F .text	000000000000000b CustomObjectItem::getItemZ() const
+0000000000000110 g     F .text	0000000000000029 SomeObject::~SomeObject()
+0000000000000140 g     F .text	0000000000000033 SomeObject::~SomeObject()
+0000000000000180 g     F .text	000000000000007a non-virtual thunk to CustomObjectItem::~CustomObjectItem()
+0000000000000000  w    O .data.rel.ro.local._ZTV16CustomObjectItem	00000000000000a0 vtable for CustomObjectItem
+0000000000000000  w    O .data.rel.ro._ZTV14SomeObjectItem	0000000000000090 vtable for SomeObjectItem
+0000000000000000  w    O .data.rel.ro._ZTV8SomeItem	0000000000000050 vtable for SomeItem
+0000000000000200 g     F .text	000000000000007a CustomObjectItem::~CustomObjectItem()
+0000000000000200 g     F .text	000000000000007a CustomObjectItem::~CustomObjectItem()
+0000000000000280 g     F .text	0000000000000082 CustomObjectItem::~CustomObjectItem()
+0000000000000310 g     F .text	000000000000008f non-virtual thunk to CustomObjectItem::~CustomObjectItem()
+00000000000003a0 g     F .text	0000000000000036 SomeObject::SomeObject()
+00000000000003a0 g     F .text	0000000000000036 SomeObject::SomeObject()
+00000000000003e0 g     F .text	000000000000000c SomeObject::getObjectC() const
+00000000000003f0 g     F .text	000000000000003d SomeItem::SomeItem()
+00000000000003f0 g     F .text	000000000000003d SomeItem::SomeItem()
+0000000000000430 g     F .text	0000000000000029 SomeItem::~SomeItem()
+0000000000000430 g     F .text	0000000000000029 SomeItem::~SomeItem()
+0000000000000460 g     F .text	0000000000000033 SomeItem::~SomeItem()
+00000000000004a0 g     F .text	000000000000000c SomeItem::getItemE() const
+00000000000004b0 g     F .text	000000000000008e SomeObjectItem::SomeObjectItem()
+00000000000004b0 g     F .text	000000000000008e SomeObjectItem::SomeObjectItem()
+0000000000000540 g     F .text	0000000000000052 SomeObjectItem::~SomeObjectItem()
+0000000000000540 g     F .text	0000000000000052 SomeObjectItem::~SomeObjectItem()
+00000000000005a0 g     F .text	000000000000005c SomeObjectItem::~SomeObjectItem()
+0000000000000600 g     F .text	0000000000000052 non-virtual thunk to SomeObjectItem::~SomeObjectItem()
+0000000000000660 g     F .text	000000000000006a non-virtual thunk to SomeObjectItem::~SomeObjectItem()
+00000000000006d0 g     F .text	000000000000004e CustomObjectItem::CustomObjectItem()
+00000000000006d0 g     F .text	000000000000004e CustomObjectItem::CustomObjectItem()
+0000000000000720 g     F .text	000000000000000b CustomObjectItem::getItemZ() const
 0000000000000000  w    O .rodata._ZTS10SomeObject	000000000000000d typeinfo name for SomeObject
 0000000000000000  w    O .data.rel.ro._ZTI10SomeObject	0000000000000010 typeinfo for SomeObject
 0000000000000000         *UND*	0000000000000000 vtable for __cxxabiv1::__class_type_info

@@ -28,6 +28,8 @@ public:
     int getItemB() const;
     int getItemC() const;
     int getItemD() const;
+    int getItemF() const;   // dispatch probe: virtual, C++ base returns 16
+    int getItemG() const;   // C++ implementation calls getItemF()
     final int getItemE() const;
 
 protected:
@@ -38,6 +40,8 @@ static assert(__traits(getVirtualIndex, SomeItem.getItemA) == 2);
 static assert(__traits(getVirtualIndex, SomeItem.getItemB) == 3);
 static assert(__traits(getVirtualIndex, SomeItem.getItemC) == 4);
 static assert(__traits(getVirtualIndex, SomeItem.getItemD) == 5);
+static assert(__traits(getVirtualIndex, SomeItem.getItemF) == 6);
+static assert(__traits(getVirtualIndex, SomeItem.getItemG) == 7);
 static assert(__traits(getVirtualIndex, SomeItem.getItemE) == -1);
 
 
@@ -67,7 +71,35 @@ public:
     override int getItemD() const;
     int getItemA() const { assert(0); }
     override int getItemC() const { return asConstSomeItem().getItemC(); }
+    int getItemF() const { assert(0); }
     final int getItemE() const { return asConstSomeItem().getItemE(); }
+protected:
+    final void installSecondaryVtable(void* classInit)
+    {
+        enum offset = 16;
+        enum someItemSlots = 8;
+        __gshared static void*[someItemSlots] table;
+        __gshared static void* cachedInit;
+
+        auto thisObj = cast(byte*)this;
+        if (cachedInit != classInit)
+        {
+            auto cppVtbl = cast(void**)*cast(void***)(thisObj + offset);
+            table[0 .. someItemSlots] = cppVtbl[0 .. someItemSlots];
+
+            auto init = cast(byte*)classInit;
+            auto dPrimary = cast(void**)*cast(void***)(init + 0);
+            auto dThunk = cast(void**)*cast(void***)(init + offset);
+
+            table[2] = dPrimary[6];
+            table[3] = dThunk[0];
+            table[4] = dThunk[1];
+            table[5] = dThunk[2];
+            table[6] = dPrimary[8];
+            cachedInit = classInit;
+        }
+        *cast(void***)(thisObj + offset) = table.ptr;
+    }
 private:
     pragma(inline, true) const(SomeItem) asConstSomeItem() const
     {
@@ -80,6 +112,7 @@ static assert(__traits(getVirtualIndex, SomeObjectItem.getItemB) == 4);
 static assert(__traits(getVirtualIndex, SomeObjectItem.getItemD) == 5);
 static assert(__traits(getVirtualIndex, SomeObjectItem.getItemA) == 6);
 static assert(__traits(getVirtualIndex, SomeObjectItem.getItemC) == 7);
+static assert(__traits(getVirtualIndex, SomeObjectItem.getItemF) == 8);
 static assert(__traits(getVirtualIndex, SomeObjectItem.getItemE) == -1);
 
 

@@ -25,6 +25,8 @@ public:
     virtual int getItemB() const = 0;
     virtual int getItemC() const;
     virtual int getItemD() const;
+    virtual int getItemF() const;   // dispatch probe: C++ base implementation returns 16
+    virtual int getItemG() const;   // internally calls getItemF() (virtual dispatch)
     int getItemE() const;
 protected:
     struct SomeItemPrivate;

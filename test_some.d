@@ -10,8 +10,14 @@ extern(C++) class TestItem : SomeItem
 
 extern(C++) class TestObjectItem : SomeObjectItem
 {
-    this() {}
+    this() { super(); }
     override int getItemA() const { return 1; }
+    override int getItemC() const { return 2; }
+    override int getItemF() const { return 1; }
+    final void install()
+    {
+        installSecondaryVtable(cast(void*)__traits(initSymbol, TestObjectItem));
+    }
 }
 
 int failures;
@@ -41,14 +47,37 @@ int main()
     check("ti.getItemC", ti.getItemC(), 13);
     check("ti.getItemD", ti.getItemD(), 14);
     check("ti.getItemE", ti.getItemE(), 15);
+    check("ti.getItemF", ti.getItemF(), 16);
 
     writeln("=== SomeObjectItem (via TestObjectItem) ===");
     auto toi = new TestObjectItem();
     check("toi.getItemA", toi.getItemA(), 1);
     check("toi.getItemB", toi.getItemB(), 112);
-    check("toi.getItemC", toi.getItemC(), 13);
+    check("toi.getItemC", toi.getItemC(), 2);
     check("toi.getItemD", toi.getItemD(), 114);
     check("toi.getItemE", toi.getItemE(), 15);
+    check("toi.getItemF", toi.getItemF(), 1);   // D dispatch via primary vptr
+
+    writeln("=== secondary vptr WITHOUT install (C++ tables) ===");
+    SomeItem psi2 = cast(SomeItem)(cast(void*)(cast(byte*)&toi.baseItemInterface - (void*).sizeof));
+    check("psi2.getItemB", psi2.getItemB(), 112);
+    check("psi2.getItemC", psi2.getItemC(), 13);
+    check("psi2.getItemD", psi2.getItemD(), 114);
+    check("psi2.getItemE", psi2.getItemE(), 15);
+    check("psi2.getItemF", psi2.getItemF(), 16);  // C++ SomeItem base implementation
+    check("psi2.getItemG", psi2.getItemG(), 16);  // C++ getItemG -> internal getItemF -> C++ 16
+
+    writeln("=== installSecondaryVtable ===");
+    toi.install();
+
+    writeln("=== secondary vptr WITH install (D entries) ===");
+    check("psi2.getItemA", psi2.getItemA(), 1);   // D override reachable via secondary vptr
+    check("psi2.getItemB", psi2.getItemB(), 112);
+    check("psi2.getItemC", psi2.getItemC(), 2);   // D override reachable via secondary vptr
+    check("psi2.getItemD", psi2.getItemD(), 114);
+    check("psi2.getItemE", psi2.getItemE(), 15);
+    check("psi2.getItemF", psi2.getItemF(), 1);   // D override reachable via secondary vptr
+    check("psi2.getItemG", psi2.getItemG(), 1);   // C++ getItemG -> internal getItemF -> D override 1
 
     writeln("=== CustomObjectItem ===");
     auto coi = new CustomObjectItem();

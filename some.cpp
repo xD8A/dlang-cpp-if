@@ -23,6 +23,7 @@ struct SomeItem::SomeItemPrivate
     int c = 13;
     int d = 14;
     int e = 15;
+    int f = 16;
 };
 
 SomeItem::SomeItem()
@@ -34,6 +35,8 @@ SomeItem::~SomeItem() = default;
 
 int SomeItem::getItemC() const { return d_ptr->c; }
 int SomeItem::getItemD() const { return d_ptr->d; }
+int SomeItem::getItemF() const { return d_ptr->f; }
+int SomeItem::getItemG() const { return getItemF(); }   // virtual call, dispatches via the SomeItem vptr
 int SomeItem::getItemE() const { return d_ptr->e; }
 
 SomeObjectItem::SomeObjectItem() = default;
